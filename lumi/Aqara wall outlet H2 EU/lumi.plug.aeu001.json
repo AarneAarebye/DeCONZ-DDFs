@@ -1,11 +1,13 @@
 {
     "schema": "devcap1.schema.json",
+    "vendor": "Xiaomi",
     "manufacturername": "$MF_LUMI",
     "modelid": "lumi.plug.aeu001",
     "product": "Aqara wall outlet H2 EU",
-    "vendor": "Xiaomi",
     "sleeper": false,
     "status": "Bronze",
+    "matchexpr": "(R.endpoints.indexOf(0x15) !== -1) && (R.endpoints.indexOf(0x1F) !== -1);",
+    "md:known_issues": [ "xiaomi_known_issues_plugfw.md" ],
     "subdevices": [
       {
         "type": "$TYPE_ON_OFF_LIGHT",
@@ -94,7 +96,17 @@
             "name": "attr/name"
           },
           {
-            "name": "attr/swversion"
+            "name": "attr/swversion",
+            "parse": {
+                "at": "0x00F7",
+                "ep": 1,
+                "fn": "xiaomi:special",
+                "idx": "0x08",
+                "script": "xiaomi_swversion.js"
+              },
+              "read": {
+                "fn": "none"
+              }
           },
           {
             "name": "attr/type"
@@ -160,7 +172,17 @@
             "name": "attr/name"
           },
           {
-            "name": "attr/swversion"
+            "name": "attr/swversion",
+            "parse": {
+                "at": "0x00F7",
+                "ep": 1,
+                "fn": "xiaomi:special",
+                "idx": "0x08",
+                "script": "xiaomi_swversion.js"
+              },
+              "read": {
+                "fn": "none"
+              }
           },
           {
             "name": "attr/type"
@@ -242,7 +264,17 @@
             "name": "attr/name"
           },
           {
-            "name": "attr/swversion"
+            "name": "attr/swversion",
+            "parse": {
+                "at": "0x00F7",
+                "ep": 1,
+                "fn": "xiaomi:special",
+                "idx": "0x08",
+                "script": "xiaomi_swversion.js"
+              },
+              "read": {
+                "fn": "none"
+              }
           },
           {
             "name": "attr/type"
@@ -314,7 +346,17 @@
             "name": "attr/name"
           },
           {
-            "name": "attr/swversion"
+            "name": "attr/swversion",
+            "parse": {
+                "at": "0x00F7",
+                "ep": 1,
+                "fn": "xiaomi:special",
+                "idx": "0x08",
+                "script": "xiaomi_swversion.js"
+              },
+              "read": {
+                "fn": "none"
+              }
           },
           {
             "name": "attr/type"
@@ -335,9 +377,7 @@
           {
             "name": "state/consumption",
             "description": "The measured consumption (in Wh).",
-            "refresh.interval": 300,
-            "default": 0
-          },
+           },
           {
             "name": "state/lastupdated"
           },
