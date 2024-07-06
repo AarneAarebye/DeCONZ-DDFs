@@ -2,9 +2,10 @@
   "schema": "devcap1.schema.json",
   "manufacturername": "$MF_LUMI",
   "modelid": "lumi.plug.aeu001",
-  "product": "lumi.plug.aeu001",
+  "vendor": "Aqara",
+  "product": "WP-P01D",
   "sleeper": false,
-  "status": "Draft",
+  "status": "Bronze",
   "path": "/devices/lumi.plug.aeu001.json",
   "subdevices": [
     {
@@ -34,7 +35,17 @@
           "name": "attr/name"
         },
         {
-          "name": "attr/swversion"
+          "name": "attr/swversion",
+          "parse": {
+            "at": "0x00F7",
+            "ep": 1,
+            "fn": "xiaomi:special",
+            "idx": "0x08",
+            "script": "xiaomi_swversion.js"
+          },
+          "read": {
+            "fn": "none"
+          }
         },
         {
           "name": "attr/type"
@@ -50,7 +61,20 @@
         {
           "name": "state/on",
           "description": "True when device is on; false when off.",
-          "refresh.interval": 5
+          "refresh.interval": 5,
+          "read": {
+            "at": "0x0000",
+            "cl": "0x0006",
+            "ep": 0,
+            "fn": "zcl:attr"
+          },
+          "parse": {
+            "at": "0x0000",
+            "cl": "0x0006",
+            "ep": 0,
+            "eval": "Item.val = Attr.val",
+            "fn": "zcl:attr"
+          }
         },
         {
           "name": "state/reachable"
@@ -84,9 +108,19 @@
           "name": "attr/name"
         },
         {
-          "name": "attr/swversion"
+          "name": "attr/swversion",
+          "parse": {
+            "at": "0x00F7",
+            "ep": 1,
+            "fn": "xiaomi:special",
+            "idx": "0x08",
+            "script": "xiaomi_swversion.js"
+          },
+          "read": {
+            "fn": "none"
+          }
         },
-        {
+       {
           "name": "attr/type"
         },
         {
@@ -100,7 +134,20 @@
         {
           "name": "state/on",
           "description": "True when device is on; false when off.",
-          "refresh.interval": 5
+          "refresh.interval": 5,
+          "read": {
+            "at": "0x0000",
+            "cl": "0x0006",
+            "ep": 0,
+            "fn": "zcl:attr"
+          },
+          "parse": {
+            "at": "0x0000",
+            "cl": "0x0006",
+            "ep": 0,
+            "eval": "Item.val = Attr.val",
+            "fn": "zcl:attr"
+          }
         },
         {
           "name": "state/reachable"
@@ -120,7 +167,8 @@
         "device": "0x0051",
         "endpoint": "0x15",
         "in": [
-          "0x000C"
+          "0x000C",
+          "0x0000"
         ]
       },
       "items": [
@@ -148,7 +196,17 @@
           "name": "attr/name"
         },
         {
-          "name": "attr/swversion"
+          "name": "attr/swversion",
+          "parse": {
+            "at": "0x00F7",
+            "ep": 1,
+            "fn": "xiaomi:special",
+            "idx": "0x08",
+            "script": "xiaomi_swversion.js"
+          },
+          "read": {
+            "fn": "none"
+          }
         },
         {
           "name": "attr/type"
@@ -173,6 +231,18 @@
           "name": "state/power",
           "description": "The measured power (in W).",
           "refresh.interval": 300,
+          "read": {
+            "at": "0x050b",
+            "cl": "0x0b04",
+            "ep": 0,
+            "fn": "zcl:attr"
+          },
+          "parse": {
+            "at": "0x050b",
+            "cl": "0x0b04",
+            "ep": 0,
+            "eval": "if (Attr.val != -32768 && Attr.val != 32768) { Item.val = Attr.val; }"
+          },
           "default": 0
         }
       ]
@@ -220,7 +290,17 @@
           "name": "attr/name"
         },
         {
-          "name": "attr/swversion"
+          "name": "attr/swversion",
+          "parse": {
+            "at": "0x00F7",
+            "ep": 1,
+            "fn": "xiaomi:special",
+            "idx": "0x08",
+            "script": "xiaomi_swversion.js"
+          },
+          "read": {
+            "fn": "none"
+          }
         },
         {
           "name": "attr/type"
@@ -242,6 +322,18 @@
           "name": "state/current",
           "description": "The measured current (in mA).",
           "refresh.interval": 300,
+          "read": {
+            "at": "0x0508",
+            "cl": "0x0b04",
+            "ep": 0,
+            "fn": "zcl:attr"
+          },
+          "parse": {
+            "at": "0x0508",
+            "cl": "0x0b04",
+            "ep": 0,
+            "eval": "if (Attr.val != 65535) { Item.val = Attr.val; }"
+          },
           "default": 0
         },
         {
@@ -251,12 +343,36 @@
           "name": "state/power",
           "description": "The measured power (in W).",
           "refresh.interval": 300,
+          "read": {
+            "at": "0x050b",
+            "cl": "0x0b04",
+            "ep": 0,
+            "fn": "zcl:attr"
+          },
+          "parse": {
+            "at": "0x050b",
+            "cl": "0x0b04",
+            "ep": 0,
+            "eval": "if (Attr.val != -32768 && Attr.val != 32768) { Item.val = Attr.val; }"
+          },
           "default": 0
         },
         {
           "name": "state/voltage",
           "description": "The measured voltage (in V).",
           "refresh.interval": 300,
+          "read": {
+            "at": "0x0505",
+            "cl": "0x0b04",
+            "ep": 0,
+            "fn": "zcl:attr"
+          },
+          "parse": {
+            "at": "0x0505",
+            "cl": "0x0b04",
+            "ep": 0,
+            "eval": "if (Attr.val != 65535) { Item.val = Attr.val; }"
+          },
           "default": 0
         }
       ]
@@ -304,9 +420,19 @@
           "name": "attr/name"
         },
         {
-          "name": "attr/swversion"
+          "name": "attr/swversion",
+          "parse": {
+            "at": "0x00F7",
+            "ep": 1,
+            "fn": "xiaomi:special",
+            "idx": "0x08",
+            "script": "xiaomi_swversion.js"
+          },
+          "read": {
+            "fn": "none"
+          }
         },
-        {
+       {
           "name": "attr/type"
         },
         {
@@ -326,6 +452,18 @@
           "name": "state/consumption",
           "description": "The measured consumption (in Wh).",
           "refresh.interval": 300,
+          "read": {
+            "at": "0x0000",
+            "cl": "0x0702",
+            "ep": 0,
+            "fn": "zcl:attr"
+          },
+          "parse": {
+            "at": "0x0000",
+            "cl": "0x0702",
+            "ep": 0,
+            "eval": "Item.val = Attr.val"
+          },
           "default": 0
         },
         {
@@ -335,6 +473,18 @@
           "name": "state/power",
           "description": "The measured power (in W).",
           "refresh.interval": 300,
+          "read": {
+            "at": "0x050b",
+            "cl": "0x0b04",
+            "ep": 0,
+            "fn": "zcl:attr"
+          },
+          "parse": {
+            "at": "0x050b",
+            "cl": "0x0b04",
+            "ep": 0,
+            "eval": "if (Attr.val != -32768 && Attr.val != 32768) { Item.val = Attr.val; }"
+          },
           "default": 0
         }
       ]
