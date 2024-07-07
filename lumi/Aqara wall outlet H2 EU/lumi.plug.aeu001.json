@@ -7,6 +7,8 @@
   "sleeper": false,
   "status": "Bronze",
   "path": "/devices/lumi.plug.aeu001.json",
+  "matchexpr": "(R.endpoints.indexOf(0x15) !== -1) && (R.endpoints.indexOf(0x1F) !== -1);",
+  "md:known_issues": [ "xiaomi_known_issues_plugfw.md" ],
   "subdevices": [
     {
       "type": "$TYPE_ON_OFF_LIGHT",
